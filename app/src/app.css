@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* * { background-color: rgba(0, 0, 0, 0.01); } */
+
+body { @apply text-sm bg-zinc-100 dark:text-zinc-400 dark:bg-zinc-900; }
+hr { @apply my-3 border-zinc-200 dark:border-zinc-700; }
+input:disabled { @apply opacity-70; }
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  @apply border-zinc-200 rounded-md;
+}
+
+.button, button {
+  @apply block rounded-md bg-white dark:bg-zinc-700 dark:text-zinc-200 px-6 py-3 text-center font-semibold shadow; 
+}
