@@ -78,7 +78,7 @@
         </table>
       </div>
       <div v-if="loading" class="flex items-center justify-center absolute w-full h-full top-0 right-0 bottom-0 left-0">
-        <Loader tw="h-3 fill-gray-600 opacity-30" />
+        <Loader tw="h-3 fill-gray-500 opacity-30" />
       </div>
     </section>
   </main>

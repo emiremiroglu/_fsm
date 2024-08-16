@@ -50,7 +50,7 @@
         </div>
         <button class="button" type="submit">
           <span v-if="!loading">Sign In</span>
-          <Loader v-if="loading" tw="h-3 fill-zinc-300" />
+          <Loader v-if="loading" tw="h-3 fill-gray-500" />
         </button>
       </form>
     </div>

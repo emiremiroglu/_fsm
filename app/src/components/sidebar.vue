@@ -2,6 +2,7 @@
   import {ref} from 'vue';
   import session from '../lib/session';
   const user = ref(session('user'))
+  
 </script>
 
 <template>
@@ -29,6 +30,24 @@
                   Conversion Trackers
                 </router-link>
               </li>
+              <li>
+                <router-link to="/screenshots" class="group flex items-center gap-2 rounded-md p-2 pr-4 text-sm font-semibold ">
+                  <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                  </svg>
+                  Screenshot PDFs
+                </router-link>
+              </li>
+              <li>
+                <router-link to="/dco" class="group flex items-center gap-2 rounded-md p-2 pr-4 text-sm font-semibold ">
+                  <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                  </svg>
+                  DCO Editor
+                </router-link>
+              </li>
+
+
               <!-- <li>
                 <a href="#" class="group flex gap-2 rounded-md p-2 text-sm font-semibold hover:bg-gray-800 hover:text-white">
                   <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
