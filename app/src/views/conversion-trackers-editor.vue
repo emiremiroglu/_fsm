@@ -9,6 +9,11 @@
   import 'ace-builds/src-noconflict/mode-javascript';
   import 'ace-builds/src-noconflict/theme-dawn';
 
+  import {
+    ChevronLeftIcon,
+    ArrowDownTrayIcon
+  } from '@heroicons/vue/20/solid'
+
   const route = useRoute()
 
   const id = ref(route.query.id)
@@ -84,12 +89,14 @@
     <section v-if="!loading" class="flex flex-col gap-3 p-6 grow relative h-screen">
       <div class="flex items-center justify-between gap-6 pb-6 w-full">
         <router-link to="/conversion-trackers" class="button">
+          <ChevronLeftIcon class="w-5"/>
           Back
         </router-link>
         <h1 class="text-2xl font-semibold leading-tight">
           <Title :_="title" />
         </h1>
         <button to="/" class="button">
+          <ArrowDownTrayIcon class="w-5"/>
           Download
         </button>
       </div>
@@ -103,7 +110,3 @@
     </section>
   </main>
 </template>
-
-<style scoped>
-
-</style>

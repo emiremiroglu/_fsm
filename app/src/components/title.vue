@@ -5,5 +5,5 @@
 </script>
 
 <template>
-  <h1 class="font-semibold text-2xl">{{ _ }}</h1>
+  <h1 class="font-semibold text-2xl leading-snug">{{ _ }}</h1>
 </template>
