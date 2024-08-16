@@ -26,10 +26,10 @@
 <template>
   <main class="flex">
     <Sidebar />
-    <section class="grow p-6 h-screen relative">
+    <section class="grow p-5 h-screen relative">
       <div v-if="!loading" class="flex items-center justify-between pb-6">
         <div>
-          <h1 class="text-2xl font-semibold leading-tight">Conversion Trackers</h1>
+          <Title _="Conversion Trackers"/>
         </div>
         <router-link to="/conversion-trackers/editor" class="button">
           <PlusCircleIcon class="w-6"/>

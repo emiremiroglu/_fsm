@@ -1,4 +1,4 @@
-<!-- CREATE -->
+<!-- CONVERSION TRACKER EDITOR -->
 <script setup>
   import { ref, onMounted } from 'vue';
   import { useRoute } from 'vue-router'
@@ -12,7 +12,7 @@
   const route = useRoute()
 
   const id = ref(route.query.id)
-  const loading = ref(false)
+  const loading = ref(true)
   const tracker = ref({})
   
   const title = ref('')
@@ -52,6 +52,7 @@
     scrollPastEnd: 0, // number -> !maxLines: if positive, user can scroll pass the last line and go n * editorHeight more distance 
     fixedWidthGutter: false, // boolean: true if the gutter should be fixed width
     theme: 'ace/theme/dawn', // theme string from ace/theme or custom?
+      resize: true,
 
     // session options
     firstLineNumber: 1, // number: the line number in first line
@@ -76,16 +77,12 @@
     }
   })
 
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-
-  });
-
 </script>
 
 <template>
   <main>
-    <section v-if="!loading" class="p-6 grow">
-      <div class="flex items-center justify-between gap-6 pb-6 w-ful">
+    <section v-if="!loading" class="flex flex-col gap-3 p-6 grow relative h-screen">
+      <div class="flex items-center justify-between gap-6 pb-6 w-full">
         <router-link to="/conversion-trackers" class="button">
           Back
         </router-link>
@@ -96,14 +93,11 @@
           Download
         </button>
       </div>
-      <div class="flex flex-col gap-6">
-        <input type="text" v-model="tracker.filename" disabled>
-        <v-ace-editor ref="editor" v-model:value="tracker.code" lang="javascript" theme="chrome" class="h-[800px] rounded-md" :options="options" />
+      <input class="w-full p-4" type="text" v-model="tracker.filename" disabled>
+      <div class="relative flex-1">
+        <v-ace-editor class="absolute w-full h-full rounded-xl" ref="editor" v-model:value="tracker.code" lang="javascript" :options="options" />
       </div>
     </section>
-    <code class="whitespace-pre">
-      {{ tracker }}
-    </code>
     <section v-if="loading" class="flex items-center justify-center absolute w-screen h-screen top-0 right-0 bottom-0 left-0">
       <Loader tw="h-3 fill-zinc-600 opacity-30" />
     </section>

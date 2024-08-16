@@ -6,7 +6,7 @@
 
 <template>
     <div class="flex flex-col gap-10 overflow-y-auto bg-gray-200 p-4 md:pb-0 h-auto md:h-screen">
-      <!-- <div class="flex shrink-0 items-center">
+      <!-- <div class="flex items-center">
         <Logo tw="h-5 fill-gray-800 dark:fill-gray-400"/>
       </div> -->
       <nav class="flex flex-1 flex-col">
@@ -15,7 +15,7 @@
             <ul role="list" class="space-y-2">
               <li>
                 <router-link to="/" class="group flex items-center gap-2 rounded-md p-2 text-sm font-semibold whitespace-nowrap">
-                  <svg class="w-6 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
                   </svg>
                   Dashboard
@@ -23,12 +23,21 @@
               </li>
               <li>
                 <router-link to="/conversion-trackers" class="group flex items-center gap-2 rounded-md p-2 pr-4 text-sm font-semibold  whitespace-nowrap">
-                  <svg class="w-6 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
                   </svg>
                   Conversion Trackers
                 </router-link>
               </li>
+              <li>
+                <router-link to="/workspaces" class="group flex items-center gap-2 rounded-md p-2 pr-4 text-sm font-semibold  whitespace-nowrap">
+                  <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                  </svg>
+                  Workspaces
+                </router-link>
+              </li>
+
               <!-- <li>
                 <router-link to="/screenshots" class="group flex items-center gap-2 rounded-md p-2 pr-4 text-sm font-semibold  whitespace-nowrap">
                   <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

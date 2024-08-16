@@ -32,5 +32,4 @@ app.use(Toaster, {
   pauseOnHover: false
 }).provide('toast', app.config.globalProperties.$toast);
 
-
 app.mount('#app')
