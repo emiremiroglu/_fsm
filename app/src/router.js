@@ -4,6 +4,7 @@ import session from './lib/session';
 
 import SignIn from "@/views/sign-in.vue";
 
+import Dashboard from "@/views/dashboard.vue";
 import ConversionTrackers from "@/views/conversion_trackers.vue";
 import Create from "@/views/create.vue";
 import Edit from "@/views/edit.vue";
@@ -17,6 +18,7 @@ const Router = createRouter({
     { name: "sign-in", path: "/sign-in", component: SignIn },
     
     // AUTH REQUIRED
+    { name: "dashboard", path: "/", component: Dashboard, meta: { auth: true } },
     { name: "trackers", path: "/conversion_trackers/", component: ConversionTrackers, meta: { auth: true } },
     { name: "create", path: "/conversion_trackers/create", component: Create, meta: { auth: true } },
     { name: "edit", path: "/conversion_trackers/edit/:tid", component: Edit, meta: { auth: true } },

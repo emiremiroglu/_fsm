@@ -23,6 +23,7 @@
       })
       .then((data) => {
         if(data) {
+          console.log(data)
           session('token', data.token)
           loading.value = false
           router.push({ path: '/conversion_trackers' })
@@ -37,17 +38,22 @@
 </script>
 <template>
   <section class="w-screen h-screen flex items-center justify-center">
-    <form @submit.prevent="handleSubmit" class="flex flex-col gap-6">
-      <div class="flex flex-col gap-3">
-        <input placeholder="Email Address" v-model="email" type="email" name="email" required>
-        <input placeholder="Password" v-model="password" name="password" type="password" required>
-      </div>
-      <div>
+    <div class="flex flex-col gap-10 w-full max-w-sm">
+      <Roundel tw="h-20 fill-gray-900 dark:fill-gray-200" />
+      <form @submit.prevent="handleSubmit" class="flex flex-col gap-6">
+        <div class="flex flex-col gap-3">
+          <input placeholder="Email Address" v-model="email" type="email" name="email" required>
+          <input placeholder="Password" v-model="password" name="password" type="password" required>
+        </div>
         <button class="button" type="submit">
           <span v-if="!loading">Sign In</span>
           <Loader v-if="loading" tw="h-3 fill-zinc-300>" />
         </button>
-      </div>
-    </form>
+      </form>
+    </div>
   </section>
 </template>
+<style scoped>
+  input { @apply p-4; }
+  button { @apply h-16; }
+</style>
