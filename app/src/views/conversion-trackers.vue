@@ -31,7 +31,7 @@
         <div>
           <h1 class="text-2xl font-semibold leading-tight">Conversion Trackers</h1>
         </div>
-        <router-link to="/conversion_trackers/create" class="button">
+        <router-link to="/conversion-trackers/editor" class="button">
           <PlusCircleIcon class="w-6"/>
           New Tracker
         </router-link>
@@ -68,7 +68,7 @@
                   <a :href="tracker.script" target="_blank" class="underline opacity-80">{{ tracker.script }}</a>
                 </td> -->
                 <td>
-                  <router-link :to="'/conversion_trackers/edit/' + tracker.id">
+                  <router-link :to="'/conversion-trackers/editor/?id=' + tracker.id">
                     <PencilSquareIcon class="h-5 opacity-60 hover:opacity-100" />
                   </router-link>
                 </td>

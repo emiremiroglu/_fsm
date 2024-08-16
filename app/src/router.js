@@ -5,9 +5,10 @@ import session from './lib/session';
 import SignIn from "@/views/sign-in.vue";
 
 import Dashboard from "@/views/dashboard.vue";
-import ConversionTrackers from "@/views/conversion_trackers.vue";
-import Create from "@/views/create.vue";
-import Edit from "@/views/edit.vue";
+import ConversionTrackers from "@/views/conversion-trackers.vue";
+import ConversionTrackersEditor from "@/views/conversion-trackers-editor.vue";
+import Screenshots from "@/views/screenshots.vue";
+import DCOEditor from "@/views/dco-editor.vue";
 
 import NotFound from "@/views/404.vue";
 
@@ -19,9 +20,12 @@ const Router = createRouter({
     
     // AUTH REQUIRED
     { name: "dashboard", path: "/", component: Dashboard, meta: { auth: true } },
-    { name: "trackers", path: "/conversion_trackers/", component: ConversionTrackers, meta: { auth: true } },
-    { name: "create", path: "/conversion_trackers/create", component: Create, meta: { auth: true } },
-    { name: "edit", path: "/conversion_trackers/edit/:tid", component: Edit, meta: { auth: true } },
+    
+    { name: "conversion-trackers", path: "/conversion-trackers/", component: ConversionTrackers, meta: { auth: true } },
+    { name: "conversion-trackers-editor", path: "/conversion-trackers/editor", component: ConversionTrackersEditor, meta: { auth: true } },
+
+    { name: "dco", path: "/dco-editor/", component: DCOEditor, meta: { auth: true } },
+    { name: "screenshots", path: "/screenshots/", component: Screenshots, meta: { auth: true } },
 
     // NOT FOUND
     { name: "not-found", path: "/:pathMatch(.*)*", component: NotFound }

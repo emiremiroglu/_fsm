@@ -29,7 +29,7 @@
             name: data.name
           })
           loading.value = false
-          router.push({ path: '/conversion_trackers' })
+          router.push({ path: '/' })
         }
       })
       .catch((err) => {
