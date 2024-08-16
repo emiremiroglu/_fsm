@@ -6,7 +6,7 @@
   })
 </script>
 <template>
-  <div class="flex flex-col gap-3 p-12 bg-white shadow-xl rounded-xl w-full">
+  <div class="card">
     <strong class="text-5xl">{{ total }}</strong>
     <span class="opacity-60">{{ label }}</span>
   </div>

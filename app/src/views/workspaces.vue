@@ -32,9 +32,9 @@
           <tbody>
             <template v-for="workspace in workspaces">
               <tr>
-                <td class="font-mono">{{ workspace.id }}</td>
+                <td class="text-sm font-mono">{{ workspace.id }}</td>
                 <td>{{ workspace.name }}</td>
-                <td>{{ workspace.advertisers.length }}</td>
+                <td>{{ workspace.advertisers?.length }}</td>
               </tr>
             </template>
           </tbody>

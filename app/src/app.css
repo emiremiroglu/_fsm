@@ -34,3 +34,5 @@ table tr th:first-child { @apply pl-0; }
 
 table tr td:last-child,
 table tr th:last-child { @apply pr-0; }
+
+.card { @apply flex flex-col p-8 bg-white shadow-xl rounded-xl w-full; }
