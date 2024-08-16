@@ -4,12 +4,15 @@
   import { VAceEditor } from 'vue3-ace-editor';
   import 'ace-builds/src-noconflict/mode-javascript';
   import 'ace-builds/src-noconflict/theme-dawn';
+  import 'ace-builds/src-noconflict/theme-cobalt';
 
   import shortid from 'shortid';
 
   const loading = ref(false)
-  const filename = ref(shortid.generate()+'.js')
+  const filename = ref(shortid.generate() + '.js')
   const content = ref(``)
+
+  const editor = ref(null)
   
   const options = ref({
     // editor options
@@ -45,7 +48,7 @@
     maxPixelHeight: 0, // number -> maxLines: set the maximum height in pixel, when 'maxLines' is defined. 
     scrollPastEnd: 0, // number -> !maxLines: if positive, user can scroll pass the last line and go n * editorHeight more distance 
     fixedWidthGutter: false, // boolean: true if the gutter should be fixed width
-    theme: 'ace/theme/textmate', // theme string from ace/theme or custom?
+    theme: 'ace/theme/cobalt', // theme string from ace/theme or custom?
 
     // session options
     firstLineNumber: 1, // number: the line number in first line
@@ -60,13 +63,13 @@
     mode: 'ace/mode/javascript' // string: path to language mode 
   })
 
-  const aceInit = () => {
-    content.value = '// Javascript goes here'
-  }
-
   onMounted(() => {
 
   })
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+
+  });
 
 </script>
 
@@ -83,7 +86,7 @@
     </div>
     <div class="flex flex-col gap-6">
       <input type="text" v-model="filename" disabled>
-      <v-ace-editor v-model:value="content" @init="aceInit" lang="javascript" theme="chrome" class="h-screen" :options="options" /></div>
+      <v-ace-editor ref="editor" v-model:value="content" lang="javascript" theme="chrome" class="h-screen" :options="options" /></div>
   </section>
   <section v-if="loading" class="flex items-center justify-center absolute w-screen h-screen top-0 right-0 bottom-0 left-0">
     <Loader tw="h-3 fill-zinc-600 opacity-30" />

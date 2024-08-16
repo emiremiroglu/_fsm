@@ -27,5 +27,4 @@ app.use(Toaster, {
 }).provide('toast', app.config.globalProperties.$toast);
 
 
-
 app.mount('#app')

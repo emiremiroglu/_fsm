@@ -1,4 +1,5 @@
 const post = require('../lib/post');
+const color = require('cli-color');
 const express = require('express');
 
 const route = express.Router();
@@ -15,7 +16,13 @@ route.post('/', (req, res) => {
       password: password
     })
     .then((data) => {
-      res.send(data)
+      console.log(color.black(data))
+      res.send({
+        id: data.record.id,
+        name: data.record.name,
+        email: data.record.email,
+        token: data.token
+      })
     })
     .catch((err) => {
       console.log(err);
