@@ -1,8 +1,10 @@
 <!-- TRACKERS -->
 <script setup>
   import { inject, ref, onMounted } from 'vue';
-  import get from '../lib/get.js';
+  import PocketBase from 'pocketbase';
 
+  import get from '../lib/get.js';
+  
   import {
     PlusIcon,
     PencilSquareIcon,
@@ -37,7 +39,7 @@
         </router-link>
       </div>
       <div v-if="!loading" class="min-w-full h-screen overflow-scroll">
-        <table class="text divide-y w-full divide-gray-300">
+        <table>
           <thead>
             <tr>
               <th></th>
@@ -48,7 +50,7 @@
               <th></th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-200">
+          <tbody>
             <template v-for="tracker in trackers">
               <tr>
                 <td>
@@ -85,15 +87,3 @@
 
 
 </template>
-
-<style scoped>
-  table { @apply mb-10; }
-  table th { @apply text-left font-semibold py-2 px-2 text-sm; }
-  table td { @apply py-2 px-2; }
-  
-  table tr td:first-child,
-  table tr th:first-child { @apply pl-0; }
-
-  table tr td:last-child,
-  table tr th:last-child { @apply pr-0; }
-</style>

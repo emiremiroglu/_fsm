@@ -54,31 +54,31 @@
     maxLines: undefined, // number: set the maximum lines possible. This will make the editor height changes
     minLines: undefined, // number: set the minimum lines possible. This will make the editor height changes
     maxPixelHeight: 0, // number -> maxLines: set the maximum height in pixel, when 'maxLines' is defined. 
-    scrollPastEnd: 0, // number -> !maxLines: if positive, user can scroll pass the last line and go n * editorHeight more distance 
-    fixedWidthGutter: false, // boolean: true if the gutter should be fixed width
     theme: 'ace/theme/dawn', // theme string from ace/theme or custom?
-      resize: true,
 
     // session options
     firstLineNumber: 1, // number: the line number in first line
     overwrite: false, // boolean
     newLineMode: 'auto', // "auto" | "unix" | "windows"
-    useWorker: false, // boolean: true if use web worker for loading scripts
     useSoftTabs: true, // boolean: true if we want to use spaces than tabs
     tabSize: 4, // number
     wrap: false, // boolean | string | number: true/'free' means wrap instead of horizontal scroll, false/'off' means horizontal scroll instead of wrap, and number means number of column before wrap. -1 means wrap at print margin
     indentedSoftWrap: true, // boolean
-    foldStyle: 'markbegin', // enum: 'manual'/'markbegin'/'markbeginend'.
     mode: 'ace/mode/javascript' // string: path to language mode 
   })
 
   onMounted(() => {
-    if(id) {
+    if(id.value) {
       get('/fsm/conversion_trackers/' + id.value).then(data => {
         tracker.value = data
-        title.value = data.name || 'New Conversion Tracker'
+        title.value = data.name
         loading.value = false
       })
+    } else {
+      title.value = 'New Conversion Tracker'
+      tracker.value.code = '//JS goes here'
+      tracker.value.filename = shortid.generate() + '.js'
+      loading.value = false
     }
   })
 
@@ -102,7 +102,7 @@
       </div>
       <input class="w-full p-4" type="text" v-model="tracker.filename" disabled>
       <div class="relative flex-1">
-        <v-ace-editor class="absolute w-full h-full rounded-xl" ref="editor" v-model:value="tracker.code" lang="javascript" :options="options" />
+        <v-ace-editor class="absolute w-full h-full rounded" ref="editor" v-model:value="tracker.code" lang="javascript" :options="options" />
       </div>
     </section>
     <section v-if="loading" class="flex items-center justify-center absolute w-screen h-screen top-0 right-0 bottom-0 left-0">

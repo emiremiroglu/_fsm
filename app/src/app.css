@@ -21,3 +21,16 @@ input[type="email"] {
 .router-link-active {
   @apply bg-gray-800 text-white;
 }
+
+table { @apply text-left divide-y w-full divide-gray-300; }
+
+table tbody { @apply divide-y divide-gray-300; }
+
+table th { @apply font-semibold py-2 px-2 text-sm; }
+table td { @apply py-2 px-2; }
+
+table tr td:first-child,
+table tr th:first-child { @apply pl-0; }
+
+table tr td:last-child,
+table tr th:last-child { @apply pr-0; }

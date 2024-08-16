@@ -15,7 +15,7 @@ module.exports = (url, body) => {
     }
   })
   .then((data) => {
-    console.log(color.black(JSON.stringify(data)))
+    console.log(color.black(JSON.stringify(data, null, 2)))
     return data
   })
   .catch((err) => {

@@ -24,10 +24,12 @@
       .then((data) => {
         if(data) {
           session('token', data.token)
+          session('workspaces', data.workspaces)
           session('user', {
             email: data.email,
             name: data.name
           })
+
           loading.value = false
           router.push({ path: '/' })
         }
