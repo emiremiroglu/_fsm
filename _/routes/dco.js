@@ -1,10 +1,11 @@
-const pb = require('../lib/pocketbase.js');
-const config = require('../config.json');
-
 const express = require('express');
 const puppeteer = require('puppeteer');
 const color = require('cli-color');
 // const _ = require('underscore');
+
+const pb = require('../lib/pocketbase.js');
+const delay = require('../lib/delay.js');
+const config = require('../config.json');
 
 const route = express.Router();
 
@@ -42,8 +43,10 @@ route.get('/preview/:id', (req, res) => {
 
         try {
           await page.goto(banner.url, {
-            waitUntil: 'networkidle2'
+            waitUntil: 'networkidle0'
           })
+
+          await delay(5000)
           
           let render = await page.screenshot({
             type: 'jpeg'

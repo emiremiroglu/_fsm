@@ -5,10 +5,10 @@
 </script>
 
 <template>
-    <div class="flex flex-col gap-10 overflow-y-auto bg-gray-200 p-5 md:pb-0 h-auto md:h-screen min-w-[300px]">
-      <!-- <div class="flex items-center">
+    <div class="flex flex-col gap-6 overflow-y-auto bg-gray-200 p-5 md:pb-0 h-auto md:h-screen min-w-[300px]">
+      <div class="flex items-center p-3">
         <Logo tw="h-5 fill-gray-800 dark:fill-gray-400"/>
-      </div> -->
+      </div>
       <nav class="flex flex-1 flex-col">
         <ul role="list" class="flex flex-1 flex-col gap-y-7">
           <li>

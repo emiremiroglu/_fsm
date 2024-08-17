@@ -85,7 +85,8 @@
 </script>
 
 <template>
-  <main>
+  <main class="flex flex-col md:flex-row">
+    <Sidebar />
     <section v-if="!loading" class="flex flex-col gap-3 p-6 grow relative h-screen">
       <div class="flex items-center justify-between gap-6 pb-6 w-full">
         <router-link to="/conversion-trackers" class="button">

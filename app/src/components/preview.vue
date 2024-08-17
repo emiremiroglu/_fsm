@@ -7,7 +7,7 @@
     data: Object
   })
 
-  const loading = ref(false)
+  const loading = ref(true)
   const src = ref('')
 
   onMounted(()=> {
@@ -27,5 +27,10 @@
 </script>
 
 <template>
-  <img class="w-full" :src="src">
+  <div v-if="loading" class="relative w-full h-full">
+    <div class="absolute w-full h-full flex items-center justify-center">
+      <Loader tw="h-3 fill-gray-500 opacity-30" />
+    </div>
+  </div>
+  <img v-if="!loading" class="w-full" :src="src">
 </template>

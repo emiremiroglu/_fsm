@@ -19,9 +19,11 @@ module.exports = async(workspace, q) => {
         console.log(color.red(errors[e].message))
         console.log(errors[e].locations)
       }
+    } else {
+      let key = Object.keys(response.data.data)[0]
+      let records = response.data.data[key]
+      return records || [];
     }
-    let key = Object.keys(response.data.data)[0]
-    let records = response.data.data[key]
-    return records || [];
+
   })
 }

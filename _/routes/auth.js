@@ -1,4 +1,5 @@
 const post = require('../lib/post');
+const gql = require('../lib/gql');
 const color = require('cli-color');
 const express = require('express');
 
@@ -17,9 +18,6 @@ route.post('/', (req, res) => {
     })
     .then((data) => {
       let workspaces = data.record.expand.workspaces
-          workspaces = workspaces.map(workspace => {
-            console.log(workspace.name)
-          })
       res.send({
         id: data.record.id,
         name: data.record.name,

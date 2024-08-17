@@ -45,8 +45,8 @@
               <th></th>
               <th>ID</th>
               <th class="w-full">Name</th>
-              <th>URL</th>
-              <!-- <th>Script</th> -->
+              <!-- <th>URL</th> -->
+              <!-- <th>Remote</th> -->
               <th></th>
             </tr>
           </thead>
@@ -58,16 +58,18 @@
                   <div v-if="!tracker.status" class="w-5 h-3 rounded-full bg-gray-300"></div>
                 </td>
                 <td>
-                  <code class="text-sm">{{tracker.filename}}</code>
+                  <code class="text-sm">{{ tracker.id }}</code>
                 </td>
                 <td class="whitespace-nowrap">
                   {{ tracker.name }}
                 </td>
-                <td>
+                <!-- <td>
                   <a :href="tracker.website" target="_blank" class="text-mono opacity-80">{{ tracker.website }}</a>
-                </td>
+                </td> -->
                 <!-- <td class="whitespace-nowrap">
-                  <a :href="tracker.script" target="_blank" class="underline opacity-80">{{ tracker.script }}</a>
+                  <a :href="'https://dojo.phluant.com/' + tracker.filename + '.js'" target="_blank">
+                    <code class="text-sm">{{ 'https://dojo.phluant.com/' + tracker.filename + '.js' }}</code>
+                  </a>
                 </td> -->
                 <td>
                   <router-link :to="'/conversion-trackers/editor/?id=' + tracker.id">
@@ -84,6 +86,4 @@
       </div>
     </section>
   </main>
-
-
 </template>
