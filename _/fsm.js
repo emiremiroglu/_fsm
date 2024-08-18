@@ -11,6 +11,7 @@ const gql = require('./lib/gql.js');
 const auth = require('./routes/auth.js');
 const conversion_trackers = require('./routes/conversion_trackers.js');
 const dco = require('./routes/dco.js');
+const pdf = require('./routes/pdf.js');
 
 const fsm = express()
 
@@ -28,6 +29,7 @@ fsm.use(morgan(':method :url :status :res[content-length] :response-time ms'));
 fsm.use('/auth', auth)
 fsm.use('/conversion_trackers/', checkAuth, conversion_trackers)
 fsm.use('/dco/', dco)
+fsm.use('/pdf/', pdf)
 
 
 pocketbase('dojo_workspaces').then(workspaces => {

@@ -16,8 +16,11 @@
     "cli-color": "^2.0.4",
     "express": "^4.19.2",
     "morgan": "^1.10.0",
+    "pdfkit": "^0.15.0",
     "pocketbase": "^0.21.4",
     "puppeteer": "^23.1.0",
+    "shortid": "^2.2.16",
+    "slug": "^9.1.0",
     "underscore": "^1.13.7"
   }
 }
