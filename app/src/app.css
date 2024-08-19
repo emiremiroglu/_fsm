@@ -13,7 +13,7 @@ input:disabled { @apply opacity-70; }
 input[type="text"],
 input[type="password"],
 input[type="email"],
-select { @apply p-3 pl-4 border-zinc-200 dark:border-zinc-700 rounded-md dark:bg-zinc-900; }
+select { @apply p-3 pl-4 pr-6 border-zinc-200 dark:border-zinc-700 rounded-md dark:bg-zinc-900; }
 
 table { @apply text-left divide-y w-full divide-zinc-300 dark:divide-zinc-700; }
 table tbody { @apply divide-y divide-zinc-300 dark:divide-zinc-700; }
@@ -27,7 +27,7 @@ table tr th:last-child { @apply pr-0; }
 .logo { @apply h-5 fill-gray-800 dark:fill-gray-200; }
 .loader { @apply h-3 fill-zinc-300 dark:fill-zinc-600; }
 .sidebar { @apply flex flex-col gap-6 overflow-y-auto bg-zinc-200 p-5 md:pb-0 h-auto md:h-screen min-w-[300px] dark:bg-zinc-900; }
-.button, button { @apply flex items-center justify-center gap-2 rounded-md bg-white px-3 py-3 text-center font-semibold shadow dark:bg-zinc-700; }
+.button, button { @apply flex items-center justify-center gap-2 rounded-md bg-white px-3 py-3 text-center font-semibold shadow dark:bg-zinc-700 cursor-pointer; }
 .router-link-active { @apply bg-zinc-800 text-white; }
 .card { @apply flex flex-col p-8 bg-white shadow-xl rounded-xl w-full dark:bg-zinc-900; }
 

@@ -90,13 +90,13 @@
     <section v-if="!loading" class="flex flex-col gap-3 p-5 grow relative h-screen">
       <div class="flex items-center justify-between gap-5 pb-5 w-full">
         <router-link to="/conversion-trackers" class="button">
-          <ChevronLeftIcon class="w-5"/>
+          <ChevronLeftIcon class="w-6"/>
         </router-link>
         <h1 class="text-2xl font-semibold leading-tight">
           <Title :_="title" />
         </h1>
         <button to="/" class="button">
-          <ArrowDownTrayIcon class="w-5"/>
+          <ArrowDownTrayIcon class="w-6"/>
         </button>
       </div>
       <input class="w-full p-4" type="text" v-model="tracker.filename" disabled>

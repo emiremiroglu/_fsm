@@ -18,27 +18,6 @@ route.get('/:wid', async(req, res) => {
   let wid = req.params.wid
   let workspace = JSON.parse(fs.readFileSync('./db/' + wid + '.json', 'utf-8'))
 
-  workspace.advertisers = workspace.advertisers.map(advertiser => {
-    try {
-      advertiser = JSON.parse(fs.readFileSync('./db/advertisers/' + advertiser.id + '.json', 'utf-8'))
-      if(advertiser) {
-        advertiser.line_items = advertiser.all_line_item_ids.map(lid => {
-          try{
-            let line_item = JSON.parse(fs.readFileSync('./db/line_items/' + lid + '.json', 'utf-8'))
-            return line_item
-          }
-          catch(err) {
-            console.log(err)
-          }
-        })
-      }
-      return advertiser
-    }
-    catch(err) {
-      console.log(err)
-    }
-  })
-
   const browser = await puppeteer.launch(config.puppeteer);
   const [page] = await browser.pages();
 
@@ -60,6 +39,27 @@ route.get('/:wid', async(req, res) => {
 
   let buffers = [];
 
+  workspace.advertisers = workspace.advertisers.map(advertiser => {
+    try {
+      advertiser = JSON.parse(fs.readFileSync('./db/advertisers/' + advertiser.id + '.json', 'utf-8'))
+      if(advertiser) {
+        advertiser.line_items = advertiser.all_line_item_ids.map(lid => {
+          try{
+            let line_item = JSON.parse(fs.readFileSync('./db/line_items/' + lid + '.json', 'utf-8'))
+            return line_item
+          }
+          catch(err) {
+            console.log(err)
+          }
+        })
+      }
+      return advertiser
+    }
+    catch(err) {
+      console.log(err)
+    }
+  })
+
   let head = `
     <head>
       <meta charset="UTF-8">
@@ -80,7 +80,7 @@ route.get('/:wid', async(req, res) => {
     ${head}
     <body class="w-screen h-screen bg-[${workspace.css.color.dark}] overflow-y-hidden">
       <section class="flex h-screen w-screen flex-col gap-10 items-center justify-center text-center">
-        <h1 class="text-8xl tracking-tight font-bold">${workspace.name}</h1>
+        <h1 class="text-9xl tracking-tighter font-bold">${workspace.name}</h1>
         <span class="text-4xl">${month} Screenshots</span>
       <section>
     </body>
@@ -94,6 +94,8 @@ route.get('/:wid', async(req, res) => {
 
   for(let a in workspace.advertisers) {
     let advertiser = workspace.advertisers[a]
+
+    advertiser.name = advertiser.name.replaceAll('_', ', ')
 
     if(workspace.advertisers.length > 1) {
       await page.setContent(`
@@ -118,6 +120,9 @@ route.get('/:wid', async(req, res) => {
 
     for(let l in line_items) {
 
+      line_items[l].name = line_items[l].name.replace(/[0-9]/g, '');
+      line_items[l].name = line_items[l].name.replaceAll('_', ' ');
+
       await page.setContent(`
         <!DOCTYPE html>
         <html lang="en">
@@ -135,7 +140,6 @@ route.get('/:wid', async(req, res) => {
       pdf.image((await page.screenshot()).buffer, {
         fit: [pdf.page.width, pdf.page.height]
       })
-
 
     }
 
@@ -177,9 +181,12 @@ route.get('/:wid', async(req, res) => {
     })
     .end(pdfBuffer);
 
+    browser.close()
+
   });
 
   pdf.end();
+  
 
 });
 
