@@ -85,23 +85,47 @@
 </script>
 
 <template>
-  <main class="flex flex-col md:flex-row">
-    <section v-if="!loading" class="flex flex-col gap-3 p-6 grow relative h-screen">
-      <div class="flex items-center justify-between gap-6 pb-6 w-full">
+  <main class="flex">
+    <section v-if="!loading" class="flex flex-col justify-between p-5 flex-1">
+      <div class="flex items-center justify-between gap-5">
         <router-link to="/dco" class="button">
           <ChevronLeftIcon class="w-5"/>
-          Back
         </router-link>
         <h1 class="text-2xl font-semibold leading-tight">
           <Title :_="title" />
         </h1>
         <button to="/" class="button">
           <ArrowDownTrayIcon class="w-5"/>
-          Download
         </button>
       </div>
+      <div class="flex items-center justify-center w-full">
+        <iframe id="preview" width="300" height="600" class="shadow-lg bg-white rounded"></iframe>
+      </div>
+      <!-- Toolkit -->
+      <div class="w-full flex items-center justify-between">
+        <span class="text-teal-700 p-4">99 KB</span>
+        <div id="frames" class="flex gap-3 items-center">
+          <span class="opacity-60 hover:opacity-100 cursor-pointer">300x250</span>
+          <span class="text-zinc-800 bg-zinc-200 dark:text-zinc-200 dark:bg-zinc-700 rounded-full py-2 px-4">300x600</span>
+          <span class="opacity-60 hover:opacity-100 cursor-pointer">728x90</span>
+        </div>
+        <div class="flex gap-3">
+          <button class="p-3 opacity-60 hover:opacity-100 transition-opacity">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+            </svg>
+          </button>
+          <button class="p-3 opacity-60 hover:opacity-100 transition-opacity">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section v-if="!loading" class="flex flex-col flex-1 relative h-screen">
       <div class="relative flex-1">
-        <v-ace-editor class="absolute w-full h-full rounded" ref="editor" v-model:value="banner.html" lang="html" :options="options" />
+        <v-ace-editor class="absolute w-full h-full" ref="editor" v-model:value="banner.html" lang="html" :options="options" />
       </div>
     </section>
     <section v-if="loading" class="flex items-center justify-center absolute w-screen h-screen top-0 right-0 bottom-0 left-0">

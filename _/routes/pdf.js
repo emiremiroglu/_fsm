@@ -5,10 +5,13 @@ const express = require('express');
 const puppeteer = require('puppeteer');
 const PDFDocument = require('pdfkit');
 const shortid = require('shortid');
+const moment = require('moment');
 const slug = require('slug');
 const fs = require('fs');
 
 const route = express.Router();
+
+const month = moment().format('MMMM')
 
 route.get('/:wid', async(req, res) => {
 
@@ -66,7 +69,7 @@ route.get('/:wid', async(req, res) => {
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=${workspace.css.font}:ital,wght@0,100;0,200;0,300;0,400;0,700;1,100;1,200;1,300&display=swap" rel="stylesheet">
       <style>
-        body { font-family: '${workspace.css.font}', sans-serif; color: ${workspace.css.color.foreground}; }
+        body { font-family: '${workspace.css.font}', sans-serif; color: ${workspace.css.color.light}; }
       </style>
     </head>
   `
@@ -77,7 +80,8 @@ route.get('/:wid', async(req, res) => {
     ${head}
     <body class="w-screen h-screen bg-[${workspace.css.color.dark}] overflow-y-hidden">
       <section class="flex h-screen w-screen flex-col gap-10 items-center justify-center text-center">
-        <h1 class="text-8xl tracking-tight font-bold text-[${workspace.css.color.light}]">${workspace.name}</h1>
+        <h1 class="text-8xl tracking-tight font-bold">${workspace.name}</h1>
+        <span class="text-4xl">${month} Screenshots</span>
       <section>
     </body>
     </html>
@@ -98,7 +102,7 @@ route.get('/:wid', async(req, res) => {
         ${head}
         <body class="w-screen h-screen bg-[${workspace.css.color.light}] overflow-y-hidden">
           <section class="flex h-screen w-screen flex-col gap-10 items-center justify-center text-center">
-            <h1 class="text-5xl tracking-tight font-bold text-[${workspace.css.color.dark}]">${advertiser.name}</h1>
+            <h1 class="text-6xl tracking-tight font-bold text-[${workspace.css.color.dark}]">${advertiser.name}</h1>
           <section>
         </body>
         </html>
@@ -109,6 +113,32 @@ route.get('/:wid', async(req, res) => {
         fit: [pdf.page.width, pdf.page.height]
       })
     }
+
+    let line_items = advertiser.line_items
+
+    for(let l in line_items) {
+
+      await page.setContent(`
+        <!DOCTYPE html>
+        <html lang="en">
+        ${head}
+        <body class="w-screen h-screen bg-[${workspace.css.color.light}] overflow-y-hidden">
+          <section class="flex h-screen w-screen gap-6 items-center justify-center text-center">
+            <span class="text-4xl font-bold text-[${workspace.css.color.dark}]">${line_items[l].name}</span>
+          <section>
+        </body>
+        </html>
+      `)
+
+      pdf.addPage(config.pdf)
+
+      pdf.image((await page.screenshot()).buffer, {
+        fit: [pdf.page.width, pdf.page.height]
+      })
+
+
+    }
+
   }
 
   await page.setContent(`

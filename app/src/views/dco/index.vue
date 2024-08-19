@@ -4,6 +4,7 @@
   import get from '@/lib/get.js';
 
   import {
+    PlusIcon,
     PencilSquareIcon,
   } from '@heroicons/vue/20/solid'
 
@@ -25,7 +26,15 @@
   <main class="flex flex-col md:flex-row">
     <Sidebar />
     <section class="grow p-5 h-screen overflow-y-scroll relative">
-      <Title v-if="!loading" _="DCO Editor" />
+      <div v-if="!loading" class="flex items-center justify-between pb-6">
+        <div>
+          <Title _="DCO Editor"/>
+        </div>
+        <router-link to="/dco/editor" class="button">
+          <PlusIcon class="w-6"/>
+          New DCO
+        </router-link>
+      </div>
       <table v-if="!loading">
         <thead>
           <tr>

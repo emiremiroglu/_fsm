@@ -15,6 +15,7 @@
     "cheerio": "^1.0.0",
     "cli-color": "^2.0.4",
     "express": "^4.19.2",
+    "moment": "^2.30.1",
     "morgan": "^1.10.0",
     "pdfkit": "^0.15.0",
     "pocketbase": "^0.21.4",
