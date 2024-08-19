@@ -91,7 +91,12 @@ let campaigns_counter = 0
         let items = pages[p].data
         for(i in items) {
           arr.push(items[i])
-          fs.writeFileSync('./db/campaigns/' + items[i].id + '.json', JSON.stringify(items[i], null, 2))
+          let campaign = {
+            id: items[i].id,
+            name: items[i].name,
+            ads: items[i].all_native_ads
+          }
+          fs.writeFileSync('./db/campaigns/' + campaign.id + '.json', JSON.stringify(campaign, null, 2))
         }
       }
       return arr
@@ -110,22 +115,22 @@ let campaigns_counter = 0
       let line_items = data[1]
       let campaigns = data[2]
 
-      // for(a in advertisers) {
-      //   console.log(advertiser_counter++, advertisers[a].name)
-      // }
+      for(a in advertisers) {
+        console.log(advertiser_counter++, advertisers[a].name)
+      }
 
       for(c in campaigns) {
         let advertiser = _.findWhere(advertisers, { id: campaigns[c].advertiser_id })
 
         if(campaigns[c].status.code === 'active') {
 
-          console.log( '[' + campaigns[c].channel + ']', campaigns[c].name )
+          // console.log( '[' + campaigns[c].channel + ']', campaigns[c].name )
 
           let ads = campaigns[c].all_native_ads
 
-          for(a in ads) {
-            console.log(color.black( '[' + ads[a].channel + ']', ads[a].name))
-          }
+          // for(a in ads) {
+          //   console.log(color.black( '[' + ads[a].channel + ']', ads[a].name))
+          // }
 
         }
       }

@@ -5,9 +5,9 @@
 </script>
 
 <template>
-    <div class="flex flex-col gap-6 overflow-y-auto bg-gray-200 p-5 md:pb-0 h-auto md:h-screen min-w-[300px]">
+    <div class="sidebar">
       <div class="flex items-center p-3">
-        <Logo tw="h-5 fill-gray-800 dark:fill-gray-400"/>
+        <Logo/>
       </div>
       <nav class="flex flex-1 flex-col">
         <ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -46,7 +46,7 @@
                 </router-link>
               </li>
               <li>
-                <router-link to="/dco-editor" class="group flex items-center gap-2 rounded-md p-2 pr-4 text-sm font-semibold  whitespace-nowrap">
+                <router-link to="/dco" class="group flex items-center gap-2 rounded-md p-2 pr-4 text-sm font-semibold  whitespace-nowrap">
                   <svg class="w-6 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
                   </svg>

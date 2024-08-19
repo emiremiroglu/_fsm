@@ -2,41 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  /* background-color: rgba(0, 0, 0, 0.01); */
-  padding: 0;
-  margin: 0;
-}
+* { /* background-color: rgba(0, 0, 0, 0.01); */ padding: 0; margin: 0; }
 
-body { @apply bg-gray-100 text-gray-900; }
-hr { @apply my-3 border-gray-200 dark:border-gray-700; }
+body { @apply bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-200; }
+
+
+hr { @apply my-3 border-zinc-200 dark:border-zinc-700; }
 input:disabled { @apply opacity-70; }
 
 input[type="text"],
 input[type="password"],
-input[type="email"] {
-  @apply border-gray-200 rounded-md;
-}
+input[type="email"],
+select { @apply p-3 pl-4 border-zinc-200 dark:border-zinc-700 rounded-md dark:bg-zinc-900; }
 
-.button, button {
-  @apply flex items-center justify-center gap-2 rounded-md bg-white px-3 py-3 text-center font-semibold shadow; 
-}
-
-.router-link-active {
-  @apply bg-gray-800 text-white;
-}
-
-table { @apply text-left divide-y w-full divide-gray-300; }
-
-table tbody { @apply divide-y divide-gray-300; }
-
+table { @apply text-left divide-y w-full divide-zinc-300 dark:divide-zinc-700; }
+table tbody { @apply divide-y divide-zinc-300 dark:divide-zinc-700; }
 table th { @apply font-semibold py-2 px-2 text-sm; }
 table td { @apply py-2 px-2; }
-
 table tr td:first-child,
 table tr th:first-child { @apply pl-0; }
-
 table tr td:last-child,
 table tr th:last-child { @apply pr-0; }
 
-.card { @apply flex flex-col p-8 bg-white shadow-xl rounded-xl w-full; }
+.logo { @apply h-5 fill-gray-800 dark:fill-gray-200; }
+.loader { @apply h-3 fill-zinc-200 dark:fill-zinc-600; }
+.sidebar { @apply flex flex-col gap-6 overflow-y-auto bg-zinc-200 p-5 md:pb-0 h-auto md:h-screen min-w-[300px] dark:bg-zinc-900; }
+.button, button { @apply flex items-center justify-center gap-2 rounded-md bg-white px-3 py-3 text-center font-semibold shadow dark:bg-zinc-700; }
+.router-link-active { @apply bg-zinc-800 text-white; }
+.card { @apply flex flex-col p-8 bg-white shadow-xl rounded-xl w-full dark:bg-zinc-900; }
+
+.ace_editor, .ace_editor * { line-height: 1.5rem !important; }

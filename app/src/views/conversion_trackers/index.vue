@@ -1,9 +1,10 @@
 <!-- TRACKERS -->
 <script setup>
-  import { inject, ref, onMounted } from 'vue';
+  import { ref, onMounted, inject } from 'vue';
   import PocketBase from 'pocketbase';
 
-  import get from '../lib/get.js';
+  import session from '@/lib/session.js';
+  import get from '@/lib/get.js';
   
   import {
     PlusIcon,
@@ -28,7 +29,7 @@
 <template>
   <main class="flex flex-col md:flex-row">
     <Sidebar />
-    <section class="grow p-5 h-screen relative">
+    <section class="grow p-5 h-screen overflow-y-scroll relative">
       <div v-if="!loading" class="flex items-center justify-between pb-6">
         <div>
           <Title _="Conversion Trackers"/>
@@ -82,7 +83,7 @@
         </table>
       </div>
       <div v-if="loading" class="flex items-center justify-center absolute w-full h-full top-0 right-0 bottom-0 left-0">
-        <Loader tw="h-3 fill-gray-500 opacity-30" />
+        <Loader />
       </div>
     </section>
   </main>

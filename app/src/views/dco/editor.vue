@@ -1,12 +1,14 @@
-<!-- CONVERSION TRACKER EDITOR -->
+<!-- DCO EDITOR -->
 <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, inject, watch } from 'vue';
   import { useRoute } from 'vue-router'
   import { VAceEditor } from 'vue3-ace-editor';
-  import get from '../lib/get';
+
+  import session from '@/lib/session';
+  import get from '@/lib/get';
   import shortid from 'shortid';
   
-  import 'ace-builds/src-noconflict/mode-javascript';
+  import 'ace-builds/src-noconflict/mode-html';
   import 'ace-builds/src-noconflict/theme-dawn';
 
   import {
@@ -18,7 +20,7 @@
 
   const id = ref(route.query.id)
   const loading = ref(true)
-  const tracker = ref({})
+  const banner = ref({})
   
   const title = ref('')
 
@@ -49,7 +51,7 @@
     highlightGutterLine: false, // boolean: true if the gutter line should be highlighted
     hScrollBarAlwaysVisible: false, // boolean: true if the horizontal scroll bar should be shown regardless
     vScrollBarAlwaysVisible: false, // boolean: true if the vertical scroll bar should be shown regardless
-    fontSize: 14, // number | string: set the font size to this many pixels
+    fontSize: 15, // number | string: set the font size to this many pixels
     fontFamily: undefined, // string: set the font-family css value
     maxLines: undefined, // number: set the maximum lines possible. This will make the editor height changes
     minLines: undefined, // number: set the minimum lines possible. This will make the editor height changes
@@ -61,35 +63,32 @@
     overwrite: false, // boolean
     newLineMode: 'auto', // "auto" | "unix" | "windows"
     useSoftTabs: true, // boolean: true if we want to use spaces than tabs
-    tabSize: 4, // number
+    tabSize: 2, // number
     wrap: false, // boolean | string | number: true/'free' means wrap instead of horizontal scroll, false/'off' means horizontal scroll instead of wrap, and number means number of column before wrap. -1 means wrap at print margin
     indentedSoftWrap: true, // boolean
-    mode: 'ace/mode/javascript' // string: path to language mode 
+    mode: 'ace/mode/html' // string: path to language mode 
   })
 
   onMounted(() => {
     if(id.value) {
-      get('/fsm/conversion_trackers/' + id.value).then(data => {
-        tracker.value = data
+      get('/fsm/dco/' + id.value).then(data => {
+        banner.value = data
         title.value = data.name
         loading.value = false
       })
     } else {
-      title.value = 'New Conversion Tracker'
-      tracker.value.code = '//JS goes here'
-      tracker.value.filename = shortid.generate() + '.js'
+      title.value = 'New DCO Banner'
+      banner.value.html = '<html></html>'
       loading.value = false
     }
   })
-
 </script>
 
 <template>
   <main class="flex flex-col md:flex-row">
-    <Sidebar />
     <section v-if="!loading" class="flex flex-col gap-3 p-6 grow relative h-screen">
       <div class="flex items-center justify-between gap-6 pb-6 w-full">
-        <router-link to="/conversion-trackers" class="button">
+        <router-link to="/dco" class="button">
           <ChevronLeftIcon class="w-5"/>
           Back
         </router-link>
@@ -101,13 +100,12 @@
           Download
         </button>
       </div>
-      <input class="w-full p-4" type="text" v-model="tracker.filename" disabled>
       <div class="relative flex-1">
-        <v-ace-editor class="absolute w-full h-full rounded" ref="editor" v-model:value="tracker.code" lang="javascript" :options="options" />
+        <v-ace-editor class="absolute w-full h-full rounded" ref="editor" v-model:value="banner.html" lang="html" :options="options" />
       </div>
     </section>
     <section v-if="loading" class="flex items-center justify-center absolute w-screen h-screen top-0 right-0 bottom-0 left-0">
-      <Loader tw="h-3 fill-zinc-600 opacity-30" />
+      <Loader />
     </section>
   </main>
 </template>
