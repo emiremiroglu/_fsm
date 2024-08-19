@@ -11,6 +11,7 @@
     ]
   },
   "pdf": {
+    "bufferPages": true,
     "margins": {
       "left": 0,
       "right": 0,

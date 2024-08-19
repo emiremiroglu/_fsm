@@ -1,17 +1,9 @@
 // PDF
 const config = require('../config.json');
-
-const express = require('express');
-const puppeteer = require('puppeteer');
-const PDFDocument = require('pdfkit');
-const shortid = require('shortid');
-const moment = require('moment');
-const slug = require('slug');
-const fs = require('fs');
-
+const express = require('express'); const puppeteer = require('puppeteer'); const PDFDocument = require('pdfkit'); const shortid = require('shortid'); const moment = require('moment'); const slug = require('slug'); const fs = require('fs'); const color = require('cli-color');
 const route = express.Router();
 
-const month = moment().format('MMMM')
+const frames = require('../../../adkit/_/db/frames.json');
 
 route.get('/:wid', async(req, res) => {
 
@@ -26,17 +18,9 @@ route.get('/:wid', async(req, res) => {
     height: 1486
   });
 
-  let pdf = new PDFDocument({
-    margins: {
-      left: 0,
-      right: 0,
-      top: 0,
-      bottom: 0
-    },
-    layout: 'landscape',
-    bufferPages: true
-  });
+  let pdf = new PDFDocument(config.pdf);
 
+  let fit = [pdf.page.width, pdf.page.height]
   let buffers = [];
 
   workspace.advertisers = workspace.advertisers.map(advertiser => {
@@ -61,6 +45,8 @@ route.get('/:wid', async(req, res) => {
   })
 
   let head = `
+    <!DOCTYPE html>
+    <html lang="en">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,34 +60,27 @@ route.get('/:wid', async(req, res) => {
     </head>
   `
 
-  await page.setContent(`
-    <!DOCTYPE html>
-    <html lang="en">
-    ${head}
+  // MAIN COVER
+  await page.setContent(head+`
     <body class="w-screen h-screen bg-[${workspace.css.color.dark}] overflow-y-hidden">
       <section class="flex h-screen w-screen flex-col gap-10 items-center justify-center text-center">
         <h1 class="text-9xl tracking-tighter font-bold">${workspace.name}</h1>
-        <span class="text-4xl">${month} Screenshots</span>
+        <span class="text-4xl">${ moment().format('MMMM') } Screenshots</span>
       <section>
     </body>
     </html>
   `)
 
   pdf.image((await page.screenshot()).buffer, {
-    fit: [pdf.page.width, pdf.page.height]
+    fit: fit
   })
 
-
+  // PAGE LOOP
   for(let a in workspace.advertisers) {
     let advertiser = workspace.advertisers[a]
-
     advertiser.name = advertiser.name.replaceAll('_', ', ')
-
     if(workspace.advertisers.length > 1) {
-      await page.setContent(`
-        <!DOCTYPE html>
-        <html lang="en">
-        ${head}
+      await page.setContent(head+`
         <body class="w-screen h-screen bg-[${workspace.css.color.light}] overflow-y-hidden">
           <section class="flex h-screen w-screen flex-col gap-10 items-center justify-center text-center">
             <h1 class="text-6xl tracking-tight font-bold text-[${workspace.css.color.dark}]">${advertiser.name}</h1>
@@ -109,24 +88,21 @@ route.get('/:wid', async(req, res) => {
         </body>
         </html>
       `)
-      
-      pdf.addPage(config.pdf)
+      pdf.addPage()
       pdf.image((await page.screenshot()).buffer, {
-        fit: [pdf.page.width, pdf.page.height]
+        fit: fit
       })
     }
 
     let line_items = advertiser.line_items
 
+    // CAMPAIGNS
     for(let l in line_items) {
 
       line_items[l].name = line_items[l].name.replace(/[0-9]/g, '');
       line_items[l].name = line_items[l].name.replaceAll('_', ' ');
 
-      await page.setContent(`
-        <!DOCTYPE html>
-        <html lang="en">
-        ${head}
+      await page.setContent(head+`
         <body class="w-screen h-screen bg-[${workspace.css.color.light}] overflow-y-hidden">
           <section class="flex h-screen w-screen gap-6 items-center justify-center text-center">
             <span class="text-4xl font-bold text-[${workspace.css.color.dark}]">${line_items[l].name}</span>
@@ -135,20 +111,51 @@ route.get('/:wid', async(req, res) => {
         </html>
       `)
 
-      pdf.addPage(config.pdf)
+      pdf.addPage()
 
       pdf.image((await page.screenshot()).buffer, {
-        fit: [pdf.page.width, pdf.page.height]
+        fit: fit
       })
 
-    }
+      if(line_items[l].status.code === 'active') {
+        try{
+          let campaign = JSON.parse(fs.readFileSync('./db/campaigns/' + line_items[l].all_campaign_ids[0] + '.json'))
+          console.log(campaign)
+          let ads = campaign.ads
+          for(let a in ads) {
+            let creatives = ads[a].creatives
+            if(creatives.length) {
+              let creative = ads[a].creatives[0]
 
+              await page.setContent(head+`
+                <body class="w-screen h-screen bg-[${workspace.css.color.light}] overflow-y-hidden">
+                  <section class="flex flex-col h-screen w-screen gap-6 items-center justify-center text-center">
+                    <img src="${creative.url}">
+                    <code class="text-2xl text-[${workspace.css.color.dark}]">${creative.width}x${creative.height}</code>
+                  <section>
+                </body>
+                </html>
+              `)
+
+              pdf.addPage()
+
+              pdf.image((await page.screenshot()).buffer, {
+                fit: fit
+              })
+            }
+          }
+        }
+        catch(err) {
+          console.log(color.red(err))
+        }
+      } else {
+        console.log(color.black(line_items[l].name))
+      }
+    }
   }
 
-  await page.setContent(`
-    <!DOCTYPE html>
-    <html lang="en">
-    ${head}
+  // ADKIT PAGE
+  await page.setContent(head+`
     <body class="w-screen h-screen bg-[${workspace.css.color.dark}] overflow-y-hidden">
       <section class="flex h-screen w-screen gap-6 items-center justify-center text-center">
         <span class="text-3xl text-[${workspace.css.color.light}]">Generated with</span>
@@ -161,33 +168,28 @@ route.get('/:wid', async(req, res) => {
     </html>
   `)
 
-  pdf.addPage(config.pdf)
+  pdf.addPage()
 
   pdf.image((await page.screenshot()).buffer, {
     fit: [pdf.page.width, pdf.page.height]
   })
 
+  // DATA EVENT
   pdf.on('data', buffers.push.bind(buffers));
 
+  // FINISH
   pdf.on('end', () => {
-
     let pdfBuffer = Buffer.concat(buffers);
     let filename = slug(workspace.name) + '-' + shortid.generate() + '.pdf'
-
     res.writeHead(200, {
       'Content-Length': Buffer.byteLength(pdfBuffer),
       'Content-Type': 'application/pdf',
       'Content-disposition': 'inline;filename=' + filename
     })
     .end(pdfBuffer);
-
     browser.close()
-
   });
-
   pdf.end();
-  
-
 });
 
 module.exports = route;

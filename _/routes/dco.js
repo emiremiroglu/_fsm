@@ -11,7 +11,7 @@ const route = express.Router();
 
 route.get('/', (req, res) => {
   let counter = 0
-  pb('dco')
+  pb('dco', null, req)
   .then(banners => {
     for(let b in banners) {
       banners[b].preview = '/fsm/dco/preview/' + banners[b].id
@@ -25,7 +25,7 @@ route.get('/:id', (req, res) => {
   if(!id) {
     res.sendStatus(400)
   } else {
-    pb('dco', id)
+    pb('dco', id, req)
     .then(data => {
       res.send(data)
     })

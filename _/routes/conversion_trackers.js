@@ -8,8 +8,9 @@ const _ = require('underscore');
 const route = express.Router();
 
 route.get('/', (req, res) => {
+  console.log(req.headers)
   let counter = 0
-  pb('conversion_trackers')
+  pb('conversion_trackers', null, req)
   .then(trackers => {
     // let checks = []
     // for(let t in trackers) {
@@ -63,12 +64,11 @@ route.get('/', (req, res) => {
 })
 
 route.get('/:id', (req, res) => {
-  console.log(req.params.id)
   const id = req.params.id
   if(!id) {
     res.sendStatus(400)
   } else {
-    pb('conversion_trackers', id)
+    pb('conversion_trackers', id, req)
     .then(data => {
       res.send(data)
     })
@@ -76,12 +76,11 @@ route.get('/:id', (req, res) => {
 })
 
 route.post('/:id', (req, res) => {
-  console.log(req.params.id)
   const id = req.params.id
   if(!id) {
     res.sendStatus(400)
   } else {
-    pb('conversion_trackers', id)
+    pb('conversion_trackers', id, req)
     .then(data => {
       res.send(data)
     })

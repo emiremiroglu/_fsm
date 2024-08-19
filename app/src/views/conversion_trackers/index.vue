@@ -1,9 +1,8 @@
 <!-- CONVERSION TRACKERS -->
 <script setup>
   import { ref, onMounted, inject } from 'vue';
-  import PocketBase from 'pocketbase';
 
-  import session from '@/lib/session.js';
+  // import session from '@/lib/session.js';
   import get from '@/lib/get.js';
   
   import {

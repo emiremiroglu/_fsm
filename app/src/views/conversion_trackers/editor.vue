@@ -4,7 +4,7 @@
   import { useRoute } from 'vue-router'
   import { VAceEditor } from 'vue3-ace-editor';
 
-  import session from '@/lib/session';
+  // import session from '@/lib/session';
   import ace_config from '@/config/ace.json';
   import get from '@/lib/get';
   import shortid from 'shortid';
