@@ -28,17 +28,15 @@
 <template>
   <main class="flex flex-col md:flex-row">
     <Sidebar />
-    <section class="grow p-5 h-screen overflow-y-scroll relative">
-      <div v-if="!loading" class="flex items-center justify-between pb-6">
-        <div>
-          <Title _="Conversion Trackers"/>
-        </div>
+    <section class="grow h-screen overflow-y-scroll">
+      <div v-if="!loading" class="sticky flex justify-between top-0 bg-zinc-100 dark:bg-zinc-800 p-5 z-50">
+        <Title _="Conversion Trackers"/>
         <router-link to="/conversion-trackers/editor" class="button">
           <PlusIcon class="w-6"/>
           New Tracker
         </router-link>
       </div>
-      <div v-if="!loading" class="min-w-full h-screen overflow-scroll">
+      <div v-if="!loading" class="min-w-full h-screen overflow-scroll p-5">
         <table>
           <thead>
             <tr>

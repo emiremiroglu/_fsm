@@ -14,6 +14,11 @@ export default ({ mode }) => {
           target: 'http://localhost:3030/',
           rewrite: (path) => path.replace(/^\/fsm/, ''),
           changeOrigin: false
+        },
+        '/stackadapt': {
+          target: 'http://localhost:3030/stackadapt',
+          rewrite: (path) => path.replace(/^\/stackadapt/, ''),
+          changeOrigin: false
         }
       }
     },

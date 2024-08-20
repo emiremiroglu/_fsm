@@ -1,13 +1,25 @@
 <script setup>
-  import { ref } from 'vue';
+  import Peity from 'vue-peity'
   const props = defineProps({
-    total: Number,
+    data: Object,
     label: String
   })
+
 </script>
+
+
 <template>
-  <div class="card">
+  <div class="card aspect-video">
+    <strong>{{ label }}</strong>
+    <Seperator />
     <strong class="text-5xl">{{ total }}</strong>
-    <span class="opacity-60">{{ label }}</span>
+    <template v-for="item in data">
+      <ol>
+        <li class="flex gap-2 justify-between">
+          <div>{{ item['name'] }}</div>
+          <code class="opacity-40">{{ item['id'] }}</code>
+        </li>
+      </ol>
+    </template>
   </div>
 </template>

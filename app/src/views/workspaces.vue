@@ -9,7 +9,7 @@
 <template>
   <main class="flex flex-col md:flex-row">
     <Sidebar />
-    <section class="grow p-5 h-screen relative">
+    <section class="grow p-5 h-screen overflow-y-scroll">
       <div class="flex items-center justify-between pb-6">
         <Title _="Workspaces"/>
         <router-link to="/" class="button">
@@ -17,29 +17,15 @@
           New Workspace
         </router-link>
       </div>
-      <div>
-        <!-- {{ workspaces }} -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
+        <template v-for="workspace in workspaces">
+          <div class="card aspect-video">
+            <strong>{{ workspace.name }}</strong>
+            <Seperator class="opacity-70" />
+            <Chart />
+          </div>
+        </template>
       </div>
-      <template v-if="workspaces.length">
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th class="w-full">Name</th>
-              <th>Advertisers</th>
-            </tr>
-          </thead>
-          <tbody>
-            <template v-for="workspace in workspaces">
-              <tr>
-                <td class="text-sm font-mono">{{ workspace.id }}</td>
-                <td>{{ workspace.name }}</td>
-                <td>{{ workspace.advertisers?.length }}</td>
-              </tr>
-            </template>
-          </tbody>
-        </table>
-      </template>
       <template v-if="!workspaces.length">
         You do not have any workspaces
       </template>
