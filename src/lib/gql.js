@@ -3,7 +3,6 @@
 import {inject} from 'vue';
 import axios from 'axios';
 
-
 const toast = inject('toast');
 
 export default async(workspace, q) => {
@@ -11,7 +10,7 @@ export default async(workspace, q) => {
     url: '/stackadapt',
     method: 'post',
     headers: {
-      'Authorization': 'Bearer ' + workspace.stackadapt_key
+      'auth': session('token')
     },
     data: {
       query: q

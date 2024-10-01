@@ -1,23 +1,7 @@
 <!-- DCO EDITOR -->
 <script setup>
-  import { ref, onMounted, inject, watch } from 'vue';
-  import { useRoute } from 'vue-router'
-  import { VAceEditor } from 'vue3-ace-editor';
-
-  import session from '@/lib/session';
-  import ace_config from '@/config/ace.json';
-  import get from '@/lib/get';
-  import shortid from 'shortid';
-  
-  import 'ace-builds/src-noconflict/mode-html';
-  import 'ace-builds/src-noconflict/theme-dawn';
-
-  import {
-    ChevronLeftIcon,
-    ArrowDownTrayIcon,
-    CameraIcon,
-    CloudArrowUpIcon
-  } from '@heroicons/vue/24/outline'
+  import { ref, onMounted, inject, watch } from 'vue'; import { useRoute } from 'vue-router'; import { VAceEditor } from 'vue3-ace-editor'; import get from '@/lib/get'; import session from '@/lib/session'; import ace_config from '@/config/ace.json'; import shortid from 'shortid'; import 'ace-builds/src-noconflict/mode-html'; import 'ace-builds/src-noconflict/theme-dawn';
+  import { ChevronLeftIcon, ArrowDownTrayIcon, CameraIcon, CloudArrowUpIcon } from '@heroicons/vue/24/outline'
 
   const route = useRoute()
 

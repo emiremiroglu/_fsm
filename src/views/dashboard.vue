@@ -66,10 +66,10 @@
   <main class="flex flex-col md:flex-row">
     <Sidebar />
     <section class="flex flex-col w-full overflow-y-scroll h-screen">
-      <div class="sticky flex justify-between top-0 bg-zinc-100 dark:bg-zinc-800 p-5 z-50">
+      <header>
         <Title _="Dashboard"/>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-5 px-5">
+      </header>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-5 p-6">
         <template v-for="workspace in workspaces">
           <template v-for="advertiser in workspace.advertisers">
             <Card :data="[]" :label="advertiser.name" />

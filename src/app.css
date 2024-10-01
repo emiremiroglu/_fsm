@@ -2,19 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-* { /* background-color: rgba(0, 0, 0, 0.01); */ padding: 0; margin: 0; }
-
+* { padding: 0; margin: 0; }
 body { @apply bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-200; }
-
-
+header { @apply sticky flex items-center justify-between top-0 p-6 py-4 z-50 shadow-lg bg-zinc-100 dark:bg-zinc-800; }
 hr { @apply my-3 border-zinc-200 dark:border-zinc-700; }
-input:disabled { @apply opacity-70; }
-
-input[type="text"],
-input[type="password"],
-input[type="email"],
-select { @apply p-3 pl-4 pr-6 border-zinc-200 dark:border-zinc-700 rounded-md dark:bg-zinc-900; }
-
 table { @apply text-left divide-y w-full divide-zinc-300 dark:divide-zinc-700; }
 table tbody { @apply divide-y divide-zinc-300 dark:divide-zinc-700; }
 table th { @apply font-semibold py-2 px-2 text-sm; }
@@ -24,9 +15,12 @@ table tr th:first-child { @apply pl-0; }
 table tr td:last-child,
 table tr th:last-child { @apply pr-0; }
 
+select { @apply p-3 pl-4 pr-6 rounded-md border-zinc-200 dark:border-zinc-700 dark:bg-zinc-900; }
+input[type="text"], input[type="password"], input[type="email"] { @apply p-3 pl-4 pr-6 rounded-md border-zinc-200 dark:border-zinc-700 dark:bg-zinc-900; }
+input:disabled { @apply opacity-70; }
+.button, button { @apply flex items-center justify-center gap-2 rounded-md px-3 py-3 text-center font-semibold shadow bg-white dark:bg-zinc-700 cursor-pointer; }
+
 .logo { @apply h-5 fill-gray-800 dark:fill-gray-200; }
 .loader { @apply h-3 fill-zinc-300 dark:fill-zinc-600; }
-.button, button { @apply flex items-center justify-center gap-2 rounded-md bg-white px-3 py-3 text-center font-semibold shadow dark:bg-zinc-700 cursor-pointer; }
 .card { @apply flex flex-col p-6 bg-white shadow rounded-xl w-full dark:bg-zinc-700; }
-
 .ace_editor, .ace_editor * { line-height: 1.5rem !important; }

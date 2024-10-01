@@ -9,20 +9,19 @@
 <template>
   <main class="flex flex-col md:flex-row">
     <Sidebar />
-    <section class="grow p-5 h-screen overflow-y-scroll">
-      <div class="flex items-center justify-between pb-6">
+    <section class="grow h-screen overflow-y-scroll">
+      <header>
         <Title _="Workspaces"/>
         <router-link to="/" class="button">
           <PlusIcon class="w-6"/>
           New Workspace
         </router-link>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
+      </header>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 p-5">
         <template v-for="workspace in workspaces">
           <div class="card aspect-video">
+            <!-- <div class="card aspect-video" :style="{color: workspace.css.color.light, backgroundColor: workspace.css.color.dark}"></div> -->
             <strong>{{ workspace.name }}</strong>
-            <Seperator class="opacity-70" />
-            <Chart />
           </div>
         </template>
       </div>

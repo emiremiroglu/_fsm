@@ -28,20 +28,20 @@
 <template>
   <main class="flex flex-col md:flex-row">
     <Sidebar />
-    <section class="grow h-screen overflow-y-scroll">
-      <div v-if="!loading" class="sticky flex justify-between top-0 bg-zinc-100 dark:bg-zinc-800 p-5 z-50">
+    <section class="grow h-screen overflow-y-scroll relative">
+      <header v-if="!loading">
         <Title _="Conversion Trackers"/>
         <router-link to="/conversion-trackers/editor" class="button">
           <PlusIcon class="w-6"/>
           New Tracker
         </router-link>
-      </div>
+      </header>
       <div v-if="!loading" class="min-w-full h-screen overflow-scroll p-5">
         <table>
           <thead>
             <tr>
               <th></th>
-              <th>ID</th>
+              <!-- <th>ID</th> -->
               <th class="w-full">Name</th>
               <!-- <th>URL</th> -->
               <!-- <th>Remote</th> -->
@@ -53,11 +53,11 @@
               <tr>
                 <td>
                   <div v-if="tracker.status" class="w-5 h-3 rounded-full bg-green-500"></div>
-                  <div v-if="!tracker.status" class="w-5 h-3 rounded-full bg-gray-300"></div>
+                  <div v-if="!tracker.status" class="w-5 h-3 rounded-full bg-zinc-300 dark:bg-zinc-700"></div>
                 </td>
-                <td>
+                <!-- <td>
                   <code class="text-sm">{{ tracker.id }}</code>
-                </td>
+                </td> -->
                 <td class="whitespace-nowrap">
                   {{ tracker.name }}
                 </td>

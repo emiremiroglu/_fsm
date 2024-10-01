@@ -4,12 +4,10 @@
     data: Object,
     label: String
   })
-
 </script>
 
-
 <template>
-  <div class="card aspect-video">
+  <div class="card aspect-square">
     <strong>{{ label }}</strong>
     <Seperator />
     <strong class="text-5xl">{{ total }}</strong>
